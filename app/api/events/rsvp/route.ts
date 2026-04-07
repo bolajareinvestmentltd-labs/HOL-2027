@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
 
     if (existing) {
       return NextResponse.json(
-        { error: 'User already RSVP'd to this event' },
+        { error: 'User already RSVP\'d to this event' },
         { status: 409 }
       );
     }

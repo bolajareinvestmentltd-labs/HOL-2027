@@ -164,15 +164,8 @@ function StatCard({ label, value, color }: { label: string; value: number; color
     </div>
   );
 }
-        const data = await response.json();
-        setSubmissions(data);
-      } else if (response.status === 401) {
-        setError('Unauthorized. Invalid token.');
-        setIsAuthenticated(false);
-      } else {
-        setError('Failed to fetch submissions');
-      }
-    } catch (err) {
+
+function SubmissionsManager() {
       setError('Error fetching submissions');
       console.error(err);
     } finally {

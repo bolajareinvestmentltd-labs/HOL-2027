@@ -1,13 +1,4 @@
 import Link from 'next/link';
-import ImageCarousel from '@/components/ImageCarousel';
-
-// Placeholder images - user should replace with actual images
-const carouselImages = [
-  'https://via.placeholder.com/1200x500?text=Kwara+Vision+1',
-  'https://via.placeholder.com/1200x500?text=Kwara+Vision+2',
-  'https://via.placeholder.com/1200x500?text=Kwara+Vision+3',
-  'https://via.placeholder.com/1200x500?text=Kwara+Vision+4',
-];
 
 export default function Home() {
   return (
@@ -60,7 +51,9 @@ export default function Home() {
               Discover the key focus areas driving Kwara Ti Wa Ni forward.
             </p>
           </div>
-          <ImageCarousel images={carouselImages} />
+          <div className="w-full h-96 bg-gradient-to-r from-blue-600 to-emerald-600 rounded-lg flex items-center justify-center text-white text-2xl font-bold">
+            Campaign Vision Gallery - Add Your Images Here
+          </div>
         </div>
       </section>
 
