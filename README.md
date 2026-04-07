@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kwara Ti Wa Ni - Website
 
-## Getting Started
+A professional, mobile-first profile website for Engr. Olufemi Sanni's (ARABA) political initiative "Kwara Ti Wa Ni".
 
-First, run the development server:
+Built with Next.js, TypeScript, Tailwind CSS, and PostgreSQL (Neon).
 
+## Quick Setup
+
+### Prerequisites
+- Node.js 18+
+- PostgreSQL (Neon recommended)
+- npm
+
+### Installation
+
+1. Setup environment variables in `.env.local`:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+DATABASE_URL=postgresql://user:password@host/db
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+ADMIN_EMAIL=admin@example.com
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install and run:
+```bash
+npm install
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Initialize database:
+```bash
+psql -d "$DATABASE_URL" -f lib/schema.sql
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Visit `http://localhost:3000`
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+/app                   Pages and routes
+  /api                 API endpoints (forms, admin)
+  /about               About page
+  /agenda              Agenda/policy page
+  /get-involved        Volunteer form
+  /share-ideas         Ideas submission form
+  /admin               Admin dashboard
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+/components            Reusable React components
+  Navigation.tsx       Header navigation
+  Footer.tsx           Footer
+  VolunteerForm.tsx    Volunteer form
+  IdeaForm.tsx         Ideas form
+  ImageCarousel.tsx    Homepage carousel
+  AnimatedHeroBackground.tsx  About page hero
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+/lib                   Utilities and database
+  db.ts                Database connection
+  types.ts             TypeScript types
+  email.ts             Email utilities
+  schema.sql           Database schema
+```
 
-## Deploy on Vercel
+## Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+✅ 5 responsive pages with mobile-first design
+✅ Volunteer registration form
+✅ Ideas/suggestions submission form
+✅ Admin dashboard with CSV export
+✅ Email notifications (configurable)
+✅ Image carousels with animations
+✅ PostgreSQL database with Neon
+✅ SEO-optimized
+✅ Ready for Vercel deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment to Vercel
+
+```bash
+# 1. Push to GitHub
+git push
+
+# 2. Visit vercel.com and import repository
+# 3. Add environment variables
+# 4. Deploy
+
+# Enable custom domain:
+# - Add domain in Vercel dashboard
+# - Update DNS records
+# - SSL auto-enabled
+```
+
+## Admin Dashboard
+
+Access at `/admin` with token authentication.
+
+Features:
+- View all volunteer submissions
+- View all idea submissions
+- Export data as CSV
+- Filter by LGA
+- Real-time submission counts
+
+## Customization
+
+- **Colors**: Edit `tailwind.config.ts` for custom palette
+- **Images**: Replace placeholders in `/public` folder
+- **Content**: Edit page files in `/app` directory
+- **Email**: Configure SMTP in `.env.local`
+
+## Support
+
+For documentation and support, see the full README.md or contact the dev team.
