@@ -9,13 +9,6 @@ const UserCreateSchema = z.object({
   role: z.enum(['volunteer', 'moderator', 'senior_moderator', 'admin']).optional(),
 });
 
-const UserUpdateSchema = z.object({
-  name: z.string().min(1).optional(),
-  phone: z.string().optional(),
-  role: z.enum(['volunteer', 'moderator', 'senior_moderator', 'admin']).optional(),
-  verified_badge: z.boolean().optional(),
-});
-
 // GET /api/users - List all users
 export async function GET(request: NextRequest) {
   try {

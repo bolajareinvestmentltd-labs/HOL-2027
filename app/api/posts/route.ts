@@ -9,12 +9,6 @@ const PostCreateSchema = z.object({
   userId: z.number().int(),
 });
 
-const PostUpdateSchema = z.object({
-  title: z.string().min(1).max(255).optional(),
-  body: z.string().min(1).optional(),
-  status: z.enum(['published', 'flagged', 'removed', 'draft']).optional(),
-});
-
 // GET /api/posts - List all posts with pagination
 export async function GET(request: NextRequest) {
   try {

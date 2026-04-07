@@ -8,10 +8,6 @@ const CommentCreateSchema = z.object({
   userId: z.number().int(),
 });
 
-const CommentUpdateSchema = z.object({
-  body: z.string().min(1).optional(),
-});
-
 // GET /api/comments - List comments for a post
 export async function GET(request: NextRequest) {
   try {

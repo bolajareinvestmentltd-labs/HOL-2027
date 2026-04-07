@@ -9,13 +9,6 @@ const EventCreateSchema = z.object({
   location: z.string().min(1),
 });
 
-const EventUpdateSchema = z.object({
-  title: z.string().min(1).max(255).optional(),
-  description: z.string().min(1).optional(),
-  date: z.string().datetime().optional(),
-  location: z.string().min(1).optional(),
-});
-
 // GET /api/events - List all events
 export async function GET(request: NextRequest) {
   try {

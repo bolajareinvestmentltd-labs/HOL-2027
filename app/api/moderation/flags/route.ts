@@ -19,11 +19,6 @@ const FlagCreateSchema = z.object({
   description: z.string().optional(),
 });
 
-const FlagStatusUpdateSchema = z.object({
-  status: z.enum(['open', 'investigating', 'resolved']),
-  moderatorNotes: z.string().optional(),
-});
-
 // GET /api/moderation/flags - List flags (for moderators)
 export async function GET(request: NextRequest) {
   try {
