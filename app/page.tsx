@@ -22,7 +22,7 @@ export default function Home() {
             A people-centered vision for a greater Kwara.
           </p>
           <p className="text-xl text-amber-300 font-semibold">
-            Engr. Olufemi Sanni, FNICE, FNSE — ARABA
+            ALH HAKEEM OLADIMEJI LAWAL — HOL
           </p>
 
           {/* CTA Buttons */}

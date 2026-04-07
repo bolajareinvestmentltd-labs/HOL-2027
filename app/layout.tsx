@@ -4,10 +4,10 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Engr. Olufemi Sanni | Kwara Ti Wa Ni",
-  description: "Kwara Ti Wa Ni - A people-centered vision for a greater Kwara. Join Engr. Olufemi Sanni (ARABA) in building a better future.",
+  title: "ALH HAKEEM OLADIMEJI LAWAL | Kwara Ti Wa Ni",
+  description: "Kwara Ti Wa Ni - A people-centered vision for a greater Kwara. Join ALH HAKEEM OLADIMEJI LAWAL (HOL) in building a better future.",
   openGraph: {
-    title: "Engr. Olufemi Sanni | Kwara Ti Wa Ni",
+    title: "ALH HAKEEM OLADIMEJI LAWAL | Kwara Ti Wa Ni",
     description: "A people-centered vision for a greater Kwara",
     type: "website",
   },

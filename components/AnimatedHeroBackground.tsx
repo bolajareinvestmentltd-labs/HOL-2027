@@ -41,9 +41,9 @@ export default function AnimatedHeroBackground({ images }: AnimatedHeroProps) {
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            The Man Behind <br/> Kwara Ti Wa Ni
+            ALH HAKEEM OLADIMEJI LAWAL <br/> (HOL)
           </h2>
-          <p className="text-xl text-amber-300">Engr. Olufemi Sanni, FNICE, FNSE — ARABA</p>
+          <p className="text-xl text-amber-300">A Dedicated Leader for Kwara</p>
         </div>
       </div>
 
