@@ -69,8 +69,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { postId, commentId, userId, reason, description } =
-      FlagCreateSchema.parse(body);
+    const { postId, commentId, userId, reason } = FlagCreateSchema.parse(body);
 
     if (!postId && !commentId) {
       return NextResponse.json(
