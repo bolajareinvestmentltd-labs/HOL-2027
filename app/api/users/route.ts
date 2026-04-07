@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('POST /api/users error:', error);
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
+        return NextResponse.json({ error: error.issues }, { status: 400 });
     }
     // Check for unique constraint violation
     if ((error as any).code === 'P2002') {

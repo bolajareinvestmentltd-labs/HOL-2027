@@ -68,7 +68,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   } catch (error) {
     console.error(`PUT /api/moderation/flags/${params.id} error:`, error);
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
+        return NextResponse.json({ error: error.issues }, { status: 400 });
     }
     return NextResponse.json(
       { error: 'Failed to update flag' },
