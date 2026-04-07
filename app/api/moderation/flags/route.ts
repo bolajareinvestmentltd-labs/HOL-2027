@@ -83,9 +83,8 @@ export async function POST(request: NextRequest) {
       data: {
         post_id: postId || null,
         comment_id: commentId || null,
-        reported_by_id: userId,
+        user_id: userId,
         reason: reason as any,
-        description: description || null,
       },
       include: {
         user: { select: { id: true, name: true } },
