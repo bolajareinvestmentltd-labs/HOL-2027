@@ -1,0 +1,247 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums for role-based access
+enum UserRole {
+  volunteer
+  moderator
+  senior_moderator
+  admin
+}
+
+enum PostStatus {
+  published
+  flagged
+  removed
+  draft
+}
+
+enum ModerationReason {
+  spam
+  hate_speech
+  harassment
+  false_claims
+  personal_attacks
+  threats
+  doxxing
+  other
+}
+
+enum FlagStatus {
+  open
+  investigating
+  resolved
+}
+
+enum MediaType {
+  image
+  video
+  document
+}
+
+enum LegacyItemType {
+  biography
+  speech
+  document
+  achievement
+}
+
+// Core Models
+
+model User {
+  id               Int                 @id @default(autoincrement())
+  name             String
+  email            String              @unique
+  phone            String?
+  role             UserRole            @default(volunteer)
+  verified_badge   Boolean             @default(false)
+  created_at       DateTime            @default(now())
+  updated_at       DateTime            @updatedAt
+
+  // Relations
+  posts            Post[]
+  comments         Comment[]
+  event_rsvps      EventRSVP[]
+  moderation_flags ModerationFlag[]
+  audit_logs       AuditLog[]
+  volunteers       Volunteer?
+
+  @@index([email])
+  @@index([role])
+}
+
+model Post {
+  id         Int       @id @default(autoincrement())
+  user_id    Int
+  title      String
+  body       String
+  status     PostStatus  @default(published)
+  upvotes    Int       @default(0)
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+
+  // Relations
+  user             User              @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  comments         Comment[]
+  moderation_flags ModerationFlag[]
+
+  @@index([user_id])
+  @@index([created_at(sort: Desc)])
+  @@index([status])
+}
+
+model Comment {
+  id         Int      @id @default(autoincrement())
+  post_id    Int
+  user_id    Int
+  body       String
+  created_at DateTime @default(now())
+
+  // Relations
+  post             Post              @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  user             User              @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  moderation_flags ModerationFlag[]
+
+  @@index([post_id])
+  @@index([user_id])
+}
+
+model Event {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  date        DateTime
+  location    String?
+  rsvp_count  Int       @default(0)
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+
+  // Relations
+  event_rsvps EventRSVP[]
+
+  @@index([date])
+}
+
+model EventRSVP {
+  id         Int      @id @default(autoincrement())
+  event_id   Int
+  user_id    Int
+  created_at DateTime @default(now())
+
+  // Relations
+  event Event @relation(fields: [event_id], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id])
+}
+
+model Media {
+  id        Int      @id @default(autoincrement())
+  type      MediaType
+  url       String
+  caption   String?
+  category  String?
+  date      DateTime?
+  created_at DateTime  @default(now())
+}
+
+model TeamMember {
+  id            Int      @id @default(autoincrement())
+  name          String
+  role          String
+  bio           String?
+  photo_url     String?
+  contact_link  String?
+  created_at    DateTime @default(now())
+}
+
+model LegacyItem {
+  id         Int            @id @default(autoincrement())
+  type       LegacyItemType
+  title      String
+  content    String?
+  date       DateTime?
+  file_url   String?
+  created_at DateTime       @default(now())
+
+  @@index([date])
+}
+
+model NewsItem {
+  id          Int      @id @default(autoincrement())
+  title       String
+  body        String
+  published_at DateTime
+  tags        String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  @@index([published_at(sort: Desc)])
+}
+
+model ModerationFlag {
+  id          Int              @id @default(autoincrement())
+  post_id     Int?
+  comment_id  Int?
+  user_id     Int
+  reason      ModerationReason
+  status      FlagStatus       @default(open)
+  created_at  DateTime         @default(now())
+  updated_at  DateTime         @updatedAt
+
+  // Relations
+  post    Post?    @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  comment Comment? @relation(fields: [comment_id], references: [id], onDelete: Cascade)
+  user    User     @relation(fields: [user_id], references: [id])
+
+  @@index([status])
+  @@index([created_at(sort: Desc)])
+}
+
+model AuditLog {
+  id          Int      @id @default(autoincrement())
+  actor_id    Int?
+  action      String
+  target_type String?
+  target_id   Int?
+  details     Json?
+  timestamp   DateTime @default(now())
+
+  // Relations
+  actor User? @relation(fields: [actor_id], references: [id])
+
+  @@index([timestamp(sort: Desc)])
+}
+
+model Volunteer {
+  id                Int      @id @default(autoincrement())
+  user_id           Int?     @unique
+  full_name         String
+  lga               String
+  phone_number      String
+  email_address     String
+  support_type      String
+  created_at        DateTime @default(now())
+
+  // Relations
+  user User? @relation(fields: [user_id], references: [id])
+
+  @@index([created_at])
+  @@index([lga])
+}
+
+model AdminSetting {
+  id         Int      @id @default(autoincrement())
+  setting_key String   @unique
+  setting_value String?
+  updated_at DateTime @updatedAt
+}

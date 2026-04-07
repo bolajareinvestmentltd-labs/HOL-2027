@@ -1,0 +1,14 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/about/page": "app/about/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/agenda/page": "app/agenda/page.js",
+  "/api/admin/submissions/route": "app/api/admin/submissions/route.js",
+  "/api/ideas/route": "app/api/ideas/route.js",
+  "/api/volunteers/route": "app/api/volunteers/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/get-involved/page": "app/get-involved/page.js",
+  "/page": "app/page.js",
+  "/share-ideas/page": "app/share-ideas/page.js"
+}
