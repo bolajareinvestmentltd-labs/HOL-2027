@@ -141,6 +141,7 @@ model EventRSVP {
   event Event @relation(fields: [event_id], references: [id], onDelete: Cascade)
   user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
+  @@unique([user_id, event_id])
   @@index([user_id])
 }
 
