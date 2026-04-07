@@ -16,7 +16,7 @@ interface RouteParams {
 }
 
 // GET /api/events/[id] - Get single event with RSVPs
-export async function GET(request: NextRequest, { params }: RouteParams) {
+export async function GET(_request: NextRequest, { params }: RouteParams) {
   try {
     const id = parseInt(params.id);
 

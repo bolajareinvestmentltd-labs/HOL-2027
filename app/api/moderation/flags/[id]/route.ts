@@ -14,7 +14,7 @@ interface RouteParams {
 }
 
 // GET /api/moderation/flags/[id] - Get flag details
-export async function GET(request: NextRequest, { params }: RouteParams) {
+export async function GET(_request: NextRequest, { params }: RouteParams) {
   try {
     const id = parseInt(params.id);
 

@@ -16,7 +16,7 @@ interface RouteParams {
 }
 
 // GET /api/users/[id] - Get user profile
-export async function GET(request: NextRequest, { params }: RouteParams) {
+export async function GET(_request: NextRequest, { params }: RouteParams) {
   try {
     const id = parseInt(params.id);
 
