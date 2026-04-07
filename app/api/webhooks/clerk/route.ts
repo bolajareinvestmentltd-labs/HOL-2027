@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(req: Request) {
   // Get the headers
-  const headerPayload = headers();
+  const headerPayload = await headers(); // Await the headers
   const svix_id = headerPayload.get('svix-id');
   const svix_timestamp = headerPayload.get('svix-timestamp');
   const svix_signature = headerPayload.get('svix-signature');
@@ -42,7 +42,7 @@ export async function POST(req: Request) {
 
   try {
     if (eventType === 'user.created' || eventType === 'user.updated') {
-      const { id, email_addresses, first_name, last_name, phone_numbers } = evt.data;
+      const { email_addresses, first_name, last_name, phone_numbers } = evt.data;
 
       const name = `${first_name || ''} ${last_name || ''}`.trim();
       const email = email_addresses[0]?.email_address;
@@ -67,7 +67,6 @@ export async function POST(req: Request) {
         },
       });
     } else if (eventType === 'user.deleted') {
-      const { id } = evt.data;
       const { email_addresses } = evt.data;
 
       const email = email_addresses?.[0]?.email_address;
